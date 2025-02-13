@@ -1,0 +1,114 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.header_text {
+    position: absolute; /* Position it absolutely */
+    top: 230px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+    font-size: 62px;
+    font-weight: bold;
+    color: rgb(231, 20, 238); /* Make it more visible */
+    z-index: 2000; /* Higher than GIFs */
+    text-shadow: 2px 2px 5px rgba(173, 17, 163, 0.5); /* Add shadow for contrast */
+}
+
+.gif_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Position it relative to the page */
+    bottom: 80px; /* Adjust this value to move it up or down */
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+}
+
+/* Bottom-left corner */
+.bottom-left {
+    position: fixed;
+    bottom: 0;
+    left: 410px;
+    width: 230px; /* Set width */
+    max-width: 300px; /* Prevent resizing beyond this value */
+    height: auto;
+    z-index: 1000;
+}
+
+/* Bottom-right corner */
+.bottom-right {
+    position: fixed;
+    bottom: 0;
+    right: 500px;
+    width: 230px; /* Set width */
+    max-width: 300px; /* Prevent resizing beyond this value */
+    height: auto;
+    z-index: 1000;
+}
+
+/* Bottom-right corner */
+.flying-cat {
+    position: fixed;
+    top: 70px;
+    left: 600px;
+    width: 230px; /* Set width */
+    max-width: 300px; /* Prevent resizing beyond this value */
+    height: auto;
+    z-index: 1000;
+}
+
+.falling-gif {
+    position: absolute;
+    top: -50px;
+    width: 50px;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+/* Wind effect for the second GIF */
+@keyframes fallAndSway {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    25% { transform: translateY(25vh) translateX(-20px); }
+    50% { transform: translateY(50vh) translateX(20px); }
+    75% { transform: translateY(75vh) translateX(-20px); }
+    100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+}
+
+.windy-gif {
+    animation: fallAndSway 6s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Styling for the corner GIFs */
+.corner-gif {
+    position: fixed;
+    width: 250px; /* Adjust size */
+    height: auto;
+    z-index: 1000; /* Keeps it above other elements */
+}
+
+/* Top-left corner */
+.top-left {
+    position: fixed; /* Keeps it fixed relative to the viewport */
+    top: -50px;
+    left: -10px;
+    width: 800px;
+}
+
+/* Top-right corner */
+.top-right {
+    position: fixed; /* Keeps it fixed relative to the viewport */
+    top: -50px;
+    right: -19px;
+    transform: scaleX(-1); /* Flips the image horizontally */
+    width: 800px;
+}

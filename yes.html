@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./yes_style.css">
+    <style>
+        body {
+            background-color: rgb(230, 168, 219);
+            overflow: hidden; /* Prevents scrollbars */
+            position: relative;
+        }
+
+        .falling-gif {
+            position: absolute;
+            top: -50px;
+            width: 50px;
+            height: auto;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        /* Wind effect for the second GIF */
+        @keyframes fallAndSway {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            25% { transform: translateY(25vh) translateX(-20px); }
+            50% { transform: translateY(50vh) translateX(20px); }
+            75% { transform: translateY(75vh) translateX(-20px); }
+            100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+        }
+
+        .windy-gif {
+            animation: fallAndSway 6s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Styling for the corner GIFs */
+        .corner-gif {
+            position: fixed;
+            width: 700px; /* Adjust size */
+            height: auto;
+            z-index: 1000; /* Keeps it above other elements */
+        }
+
+        /* Top-left corner */
+        .top-left {
+            top: -50px;
+            left: -10px;
+        }
+
+        /* Top-right corner */
+        .top-right {
+    position: absolute;
+    top: -50px;
+    right: -19px;
+    transform: scaleX(-1); /* Flips the image horizontally */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1 class="header_text">Happy Valentines Chachi My Loves</h1>
+        </div>
+        <div class="gif_container">
+            <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWc5dHA5NHRmbjN4MGFrNHBudjllNzhxd3U2aW8wYWQ0N3VvdTNvayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/guWZx1hPP4quVcdqiC/giphy.gif" alt="Cute animated illustration">
+        </div>
+        <img class="corner-gif bottom-left" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTFhZjJ5azdmMjY3aHNmZ3BrMmwyYnA4ZzZrZm03MTRpODh3cXNrNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FRPRLVXkKp5Xuqs2eK/giphy.gif" alt="Bottom Left GIF">
+        <img class="corner-gif bottom-right" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTFhZjJ5azdmMjY3aHNmZ3BrMmwyYnA4ZzZrZm03MTRpODh3cXNrNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FRPRLVXkKp5Xuqs2eK/giphy.gif" alt="Bottom Right GIF">
+        <img class="corner-gif flying-cat" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGh1YmY1d2ZkM2t6bndzYm8weXBzdHVlcG5zcmN6aWw0MnZ5aDE0YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/d3mu9bOv2AH2OPsrcp/giphy.gif" alt="Flying cat GIF">
+    </div>
+
+    <!-- Top-left and Top-right GIFs -->
+    <img class="corner-gif top-left" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXMxNm15ZHV1cXVicnl1d3Eya3VjMGYzZmw3a2JrY2x1dHdhYmo5NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t988uufli2JPfNoShM/giphy.gif" alt="Top Left GIF">
+    <img class="corner-gif top-right" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXMxNm15ZHV1cXVicnl1d3Eya3VjMGYzZmw3a2JrY2x1dHdhYmo5NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/t988uufli2JPfNoShM/giphy.gif" alt="Top Right GIF">
+    <script>
+        const gifs = [
+            {
+                src: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXB0bjRhMTJtbmNnemN6c29mbXQ0dnhkajNyaHpydnNoY2l3anp0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bQr5x0wXsgRtlCoo2t/giphy.gif",
+                type: "falling"
+            },
+            {
+                src: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExamh0NGZia2g1NTN5Z290ZDB5MDR3cmcyZ25sc3loZXdoMmIzOXJ0NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FYrXhdFoTizluMZM1F/giphy.gif"       
+            }
+        ];
+
+        function createFallingGif() {
+            const gifData = gifs[Math.floor(Math.random() * gifs.length)];
+            const gif = document.createElement("img");
+            gif.src = gifData.src;
+            gif.className = "falling-gif";
+
+            // Apply wind effect if it's the windy GIF
+            if (gifData.type === "windy") {
+                gif.classList.add("windy-gif");
+            }
+
+            document.body.appendChild(gif);
+
+            // Random size (30px - 70px)
+            const size = Math.random() * 40 + 30;
+            gif.style.width = `${size}px`;
+
+            // Random horizontal position
+            gif.style.left = Math.random() * window.innerWidth + "px";
+
+            // Random fall duration (3s - 6s)
+            gif.style.animationDuration = Math.random() * 3 + 3 + "s";
+
+            // Remove GIF after it falls
+            setTimeout(() => {
+                gif.remove();
+            }, 6000);
+        }
+
+        // Create GIFs every 300ms
+        setInterval(createFallingGif, 300);
+        document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("bg-music").volume = 0.35; // Set volume to 30%
+    });
+    </script>
+    <audio id="bg-music" autoplay loop hidden>
+        <source src="0211(1).MP3" type="audio/mpeg">
+    </audio>
+    
+    <style>
+        audio {
+            display: none;
+        }
+    </style>
+    
+</body>
+</html>
